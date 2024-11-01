@@ -2,10 +2,7 @@ import { prisma } from "@/app/lib/prisma";
 import { NextResponse } from "next/server";
 export async function POST(req: Request) {
   try {
-    // Parse the request body
     const { caption, imageUrl, userId } = await req.json();
-
-    // Validate the input
     if (!caption || !userId) {
       return NextResponse.json(
         { error: "Caption and userId are required." },
