@@ -14,14 +14,17 @@ const RegisterMain = () => {
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    console.log(email, password, username);
     if (!email || !password) {
       toastError("Please fillup all fields");
       return;
     }
+
     try {
       const response = await axios.post(`/api/auth/register`, {
         email,
         password,
+        username,
       });
       if (response.data) {
         toastSuccess("Registration successfull");
@@ -113,7 +116,8 @@ const RegisterMain = () => {
             </label>
             <input
               id="FullName"
-              className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
+              onChange={(e) => setUsername(e.target.value)}
+              className="block  w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
               type="text"
               placeholder="John Doe"
             />
@@ -128,6 +132,7 @@ const RegisterMain = () => {
             </label>
             <input
               id="LoggingEmailAddress"
+              onChange={(e) => setEmail(e.target.value)}
               className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
               type="email"
               placeholder="example@company.com"
@@ -145,6 +150,7 @@ const RegisterMain = () => {
             </div>
 
             <input
+              onChange={(e) => setPassword(e.target.value)}
               id="loggingPassword"
               className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300"
               type="password"
@@ -153,7 +159,10 @@ const RegisterMain = () => {
           </div>
 
           <div className="mt-6">
-            <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
+            <button
+              type="submit"
+              className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50"
+            >
               Sign Up
             </button>
           </div>
